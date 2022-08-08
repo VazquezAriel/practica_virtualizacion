@@ -1,0 +1,56 @@
+<p-panel header="Parqueadero UPS" [style]="{width: '95%', margin: '0 auto'}">
+
+    <p-megaMenu [model]="items"></p-megaMenu>
+
+    <br>
+
+    <div class="card">
+        <p-panel header="Vehiculos Ingresados" [style]="{width: '95%', margin: '0 auto'}" [toggleable]="true">
+            <button icon="pi pi-plus"  class="p-element p-ripple p-button-secondary p-button-text p-button p-component p-button-sm" (click)="abrirDialog()">Nuevo Ticket</button>
+            <br>
+            <br>
+            <p-table [value]="lista" styleClass="p-datatable-sm" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Numero</th>
+                        <th>Vehiculo</th>
+                        <th>Hora de Llegada</th>
+                        <th>Accion</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-ticket>
+                    <tr>
+                        <td>{{ticket.numero}}</td>
+                        <td>{{ticket.vehiculo}}</td>
+                        <td>{{ticket.hora_llegada}}</td>
+                        <td><button pButton pRipple id="accion"label="Finalizar"  class="p-button-text" (click)="finalizar(ticket)"></button></td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-panel>
+    </div>
+
+    <p-dialog [(visible)]="display" [style]="{width: '450px'}" header="Nuevo Ticket" [modal]="true" styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <div class="field">
+                <label for="placa">Numero</label>
+                <input type="text" pInputText id="placa" [(ngModel)]="ticket.numero" required autofocus />
+            </div>
+            <br>
+            <div class="field">
+                <label for="marca">Vehiculo</label>
+                <p-multiSelect [options]="vehiculos" [(ngModel)]="vehiculo" optionLabel="placa"></p-multiSelect>
+            </div>
+            <br>
+            <div class="field">
+                <label for="color">Hora de llegada</label>
+                <input type="text" pInputText id="color" [(ngModel)]="ticket.hora_llegada" required autofocus />
+            </div>
+        </ng-template>
+    
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="guardar()"></button>
+        </ng-template>
+    </p-dialog>
+
+</p-panel>

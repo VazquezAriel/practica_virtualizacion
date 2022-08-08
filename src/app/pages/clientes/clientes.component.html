@@ -1,0 +1,62 @@
+<p-panel header="Parqueadero UPS" [style]="{width: '95%', margin: '0 auto'}">
+
+    <p-megaMenu [model]="items"></p-megaMenu>
+
+    <br>
+
+    <div class="card">
+        <p-panel header="Clientes Registrados" [style]="{width: '95%', margin: '0 auto'}" [toggleable]="true">
+            <button icon="pi pi-plus"  class="p-element p-ripple p-button-secondary p-button-text p-button p-component p-button-sm" (click)="abrirDialog()">Nuevo Cliente</button>
+            <br>
+            <br>
+            <p-table [value]="lista" styleClass="p-datatable-sm" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Direccion</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-cliente>
+                    <tr>
+                        <td>{{cliente.cedula}}</td>
+                        <td>{{cliente.nombre}}</td>
+                        <td>{{cliente.apellido}}</td>
+                        <td>{{cliente.direccion}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-panel>
+    </div>
+
+    <p-dialog [(visible)]="display" [style]="{width: '450px'}" header="Nuevo Vehiculo" [modal]="true" styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <div class="field">
+                <label for="placa">Cedula</label>
+                <input type="text" pInputText id="placa" [(ngModel)]="cliente.cedula" required autofocus />
+            </div>
+            <br>
+            <div class="field">
+                <label for="marca">Nombre</label>
+                <input type="text" pInputText id="marca" [(ngModel)]="cliente.nombre" required autofocus />
+            </div>
+            <br>
+            <div class="field">
+                <label for="color">Apellido</label>
+                <input type="text" pInputText id="color" [(ngModel)]="cliente.apellido" required autofocus />
+            </div>
+            <br>
+            <div class="field">
+                <label for="tipo">Direccion</label>
+                <input type="text" pInputText id="tipo" [(ngModel)]="cliente.direccion" required autofocus />
+            </div>
+            <br>
+        </ng-template>
+    
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="guardar()"></button>
+        </ng-template>
+    </p-dialog>
+
+</p-panel>
